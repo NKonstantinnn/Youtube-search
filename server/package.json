@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "./bin/index.js",
+  "repository": "https://github.com/NKonstantin007/Youtube-search.git",
+  "author": "Konstantin Nosarev (kostya.1998.nosarev@mail.ru)",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf bin/*",
+    "tsc": "tsc",
+    "dev:start": "npm-run-all clean tsc start",
+    "dev": "nodemon --watch src -e ts --exec yarn run dev:start",
+    "start": "node ."
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.1",
+    "@types/express": "^4.17.2",
+    "@types/node": "^12.12.11",
+    "nodemon": "^1.18.7",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.0"
+  }
+}
