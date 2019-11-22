@@ -1,0 +1,15 @@
+@import '../../styles/colors.scss';
+@import '../../styles//variables.scss';
+
+html {
+    min-height: 100%;
+}
+
+body {
+    color: $color-black;
+    background: $color-primary;
+    font-size: 14px;
+    line-height: 22px;
+    font-family: $font-app;
+    margin: 0;
+}
