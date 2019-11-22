@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
  
 import store from './redux/store';
-import Main from './containers/Main';
+import Main from './containers/Main/Main';
 
 import 'antd/dist/antd.css';
 import './style.scss';
