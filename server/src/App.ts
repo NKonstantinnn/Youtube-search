@@ -1,7 +1,7 @@
 import express from 'express';
 import {Express} from "express";
 import bodyParser from 'body-parser';
-import path from 'path';
+import mongoose from 'mongoose';
 
 import config from './config';
 import AppController from './controllers/AppController';
@@ -52,6 +52,13 @@ export default class App {
         // API routing
         this.appController.init();
         this.expApp.use(`${config.apiPrefix}`, this.appController.getRouter());
+
+         // connect database
+         await mongoose.connect(config.databaseURL, {
+            useNewUrlParser: true,
+            useFindAndModify: false,
+            useUnifiedTopology: true
+        });
 
         // start server
         const port = config.port;
