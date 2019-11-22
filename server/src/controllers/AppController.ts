@@ -1,6 +1,7 @@
 import {Request, Response, NextFunction} from 'express'; 
 
 import BaseController from './BaseController';
+import AuthController from './AuthContoller';
 import IPathRoute from '../interfaces/IPathRoute';
 
 class AppController extends BaseController {
@@ -9,7 +10,9 @@ class AppController extends BaseController {
         super();
     }
 
-    private routeList: IPathRoute[] = [];
+    private routeList: IPathRoute[] = [
+        { path: '/auth', controller: new AuthController()} 
+    ];
     
     public init() {
         this.router.get('/test', (req: Request, res: Response, next: NextFunction) => {

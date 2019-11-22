@@ -1,14 +1,14 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es2017",
-        "noImplicitAny": false,
-        "removeComments": true,
-        "outDir": "bin/",
-        "sourceMap": false,
-        "esModuleInterop": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+      "module": "commonjs",
+      "target": "es2017",
+      "noImplicitAny": false,
+      "removeComments": true,
+      "outDir": "bin/",
+      "sourceMap": false,
+      "esModuleInterop": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
     },
     "include": [
         "./src/**/*"

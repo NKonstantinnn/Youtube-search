@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 
 import config from './config';
 import AppController from './controllers/AppController';
+import Passport from './middlewares/Passport';
 
 /**
  * Main class of application
@@ -48,6 +49,10 @@ export default class App {
         // oportunity to get body of request as json type
         this.expApp.use(bodyParser.urlencoded({extended: false}));
         this.expApp.use(bodyParser.json());
+
+        // Used Passport middlewares
+        this.expApp.use(Passport.initialize());
+        this.expApp.use(Passport.session());
 
         // API routing
         this.appController.init();

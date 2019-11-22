@@ -1,5 +1,5 @@
-import mongoose from'mongoose';
-import { prop, Typegoose } from '@typegoose/typegoose';
+import mongoose from 'mongoose'
+import {prop, Typegoose} from 'typegoose';
 
 export class User extends Typegoose {
     public _id: mongoose.Types.ObjectId;
@@ -8,8 +8,8 @@ export class User extends Typegoose {
     public name: string;
 
     @prop({required: true})
-    public password: string
-};
+    public password: string;
+}
 
 const UserModel = new User().getModelForClass(User);
 
