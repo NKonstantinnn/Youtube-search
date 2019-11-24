@@ -5,6 +5,10 @@ html, #root {
     min-height: 100%;
 }
 
+#root {
+    position: relative;
+}
+
 body {
     color: $color-black;
     background: $color-primary;

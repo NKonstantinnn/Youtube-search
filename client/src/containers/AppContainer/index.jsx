@@ -10,13 +10,13 @@ import './style.scss';
 
 const AppContainer = () => {
     return (
-        <div>
+        <>
             <Provider store={store}>
                 <BrowserRouter>
                    <Main />
                 </BrowserRouter>
             </Provider>
-        </div>
+        </>
     );
 }
 

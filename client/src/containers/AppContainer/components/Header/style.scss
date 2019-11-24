@@ -1,0 +1,55 @@
+@import '../../../../styles/colors.scss';
+@import '../../../../styles/variables.scss';
+
+.header {
+    height: $header-height;
+    background: $color-white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    &__content {
+        padding: 0 12% 0 12%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__menu-block {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__menu-item {
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 28px;
+        color: $color-accent;
+        margin-left: 40px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        border-bottom: 2px solid transparent;
+
+        &:hover {
+            border-color: $color-accent;
+        }
+
+        &:first-of-type {
+            margin-left: 0;
+            &:hover {
+                border-color: transparent;
+            }
+        }
+
+    }
+
+    &__logo {
+        width: 48px;
+        height: 48px;
+    }
+}
