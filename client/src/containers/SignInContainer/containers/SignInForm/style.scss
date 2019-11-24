@@ -6,13 +6,12 @@
     & .ant-card-body{
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
+        align-items: center;
         padding: 40px 88px 60px 88px;
     }
 
     &__title {
-        font-family: Roboto;
         font-weight: 500;
         font-size: 18px;
         line-height: 28px;
@@ -24,11 +23,11 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
     }
 
     &__form-item {
         margin-top: 20px;
+        width: 100%;
     }
 
     &__label {
@@ -43,6 +42,5 @@
 
     &__button {
         margin-top: 40px;
-        font-family: $font-app;
     }
 }

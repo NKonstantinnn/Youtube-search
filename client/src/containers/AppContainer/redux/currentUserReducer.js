@@ -1,4 +1,9 @@
 import {handleActions} from 'redux-actions';
+import {
+    fetchCurrentUserRequest,
+    fetchCurrentUserSuccess,
+    fetchCurrentUserFailure
+} from './actions';
 
 const defaultState = {
     isFetching: false,
@@ -8,5 +13,27 @@ const defaultState = {
 };
 
 export default handleActions({
+    [fetchCurrentUserRequest]: (state) => {
+        return {
+            ...state,
+            isFetching: true,
+            error: null
+        };
+    },
+    [fetchCurrentUserSuccess]: (state, {payload}) => {
+        return {
+            ...state,
+            user: payload,
+            isAuth: true,
+            isFetching: false,
+        }
+    },
+    [fetchCurrentUserFailure]: (state, {payload}) => {
+        return {
+            ...state,
+            error: payload,
+            isFetching: false
+        }
+    },
 
 }, defaultState);

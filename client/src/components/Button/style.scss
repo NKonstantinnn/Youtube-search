@@ -1,0 +1,25 @@
+@import '../../styles/colors.scss';
+
+.btn {
+    line-height: 1.5;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
+    height: 32px;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    color: $color-white;
+    background-color: $color-blue;
+    border-color: $color-blue;
+
+    &:hover {
+        background-color: $color-blue-hover;
+        border-color: $color-blue-hover;
+    }
+}

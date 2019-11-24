@@ -1,0 +1,16 @@
+@import '../../styles/colors.scss';
+
+.custom-input {
+    &__input {
+        margin-bottom: 0.5rem;
+
+        &:focus {
+            background: $color-blue-light;
+        }
+    }
+
+    &__error-msg {
+        color: $color-red-dark
+    }
+}
+
