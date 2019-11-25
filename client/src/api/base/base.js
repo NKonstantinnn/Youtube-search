@@ -1,6 +1,6 @@
 export const baseUrl = '/api';
 
-export const getDefaultParams = () =>  ({
+export const getAuthParams = () =>  ({
     headers: {
         Authorization: `Bearer ${localStorage.getItem('youtubeToken')}`
     }

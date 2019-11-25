@@ -1,0 +1,40 @@
+@import '../../styles/colors.scss';
+@import '../../styles//variables.scss';
+
+.search-container {
+    padding: 0 12% 0 12%;
+    position: absolute;
+    top: $header-height;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: 100%;
+
+        &_defaulted {
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &__title {
+        font-weight: normal;
+        color: $color-black;
+
+        &_big {
+            font-size: 36px;
+            line-height: 52px;
+        }
+
+        &_small {
+            font-size: 28px;
+            line-height: 40px;
+        }
+    }
+}
