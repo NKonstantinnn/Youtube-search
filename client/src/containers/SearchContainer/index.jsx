@@ -2,12 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { Col } from 'antd';
+import {fetchVideos} from './redux/actions';
 
 import SearchForm from './containers/SearchForm';
 
 import './style.scss';
 
-const SearchContainer = ({isFirstSearch}) => {
+const SearchContainer = ({isFirstSearch, fetchVideos}) => {
+
+    const handleSearch = ({query}) => {
+        if(query) {
+            fetchVideos(query);
+        }
+    }
 
     return (
         <div className="search-container">
@@ -23,7 +30,7 @@ const SearchContainer = ({isFirstSearch}) => {
                     >
                         Поиск видео
                     </h1>
-                    <SearchForm />
+                    <SearchForm onSubmit={handleSearch} />
                 </div>
             </Col>
         </div>
@@ -41,4 +48,8 @@ const mapStateToProps = ({search}) => {
     };
 }
 
-export default connect(mapStateToProps)(SearchContainer);
+const mapDispatchToProps = {
+    fetchVideos
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);

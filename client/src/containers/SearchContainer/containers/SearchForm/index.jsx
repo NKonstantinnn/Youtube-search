@@ -1,16 +1,28 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
+import PropTypes from 'prop-types';
 
-import SearchInput from '../../components/SearchInput';
+import CusotomInput from '../../../../components/CustomInput';
 
 import './style.scss';
 
-const SearchForm = () => {
+const SearchForm = ({handleSubmit}) => {
     return (
-        <form className="search-form">
-            <Field name="query" component={SearchInput} />
+        <form className="search-form" onSubmit={handleSubmit}>
+            <Field 
+                name="query" 
+                component={CusotomInput} 
+                size="large"
+                type="text"
+                placeholder="Что хотите посмотреть?" 
+            />
+            <button type="submit" className="search-form__button">Найти</button>
         </form>
     );
+}
+
+SearchForm.propTypes = {
+    handleSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({ 

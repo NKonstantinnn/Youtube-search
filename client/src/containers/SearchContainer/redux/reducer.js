@@ -22,7 +22,7 @@ export default handleActions({
             error: null
         };
     },
-    [fetchVideosSuccess]: (state, payload) => {
+    [fetchVideosSuccess]: (state, {payload}) => {
         return {
             ...state,
             error: null,
