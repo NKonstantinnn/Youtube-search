@@ -10,6 +10,7 @@ const defaultState = {
     isFetching: false,
     error: null,
     isFirstSearch: true,
+    query: "",
     videos: []
 };
 
@@ -28,7 +29,8 @@ export default handleActions({
             error: null,
             isFetching: false,
             isFirstSearch: false,
-            videos: payload
+            videos: payload.videos,
+            query: payload.query
         };
     },
     [fetchVideosFailure]: (state, { payload }) => {

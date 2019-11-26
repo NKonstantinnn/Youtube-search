@@ -15,7 +15,7 @@ export const fetchVideos = (query, maxResults, order) => async (dispatch) => {
             title: snippet.title,
             description: snippet.description
         }));
-        dispatch(fetchVideosSuccess(videos));
+        dispatch(fetchVideosSuccess({ videos, query }));
     }
     catch(err) {
         console.log(err);

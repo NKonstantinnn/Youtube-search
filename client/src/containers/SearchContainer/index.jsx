@@ -1,19 +1,27 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { Col } from 'antd';
 import {fetchVideos} from './redux/actions';
 
 import SearchForm from './containers/SearchForm';
+import FilterPanel from './components/FilterPanel';
+import ViewCase from '../.../../../assets/types/ViewCase';
 
 import './style.scss';
 
-const SearchContainer = ({isFirstSearch, fetchVideos}) => {
+const SearchContainer = ({isFirstSearch, query, videos, fetchVideos}) => {
+
+    const [viewSCase, setViewCase] = useState(ViewCase.GRID);
 
     const handleSearch = ({query}) => {
         if(query) {
             fetchVideos(query);
         }
+    }
+
+    const toggleViewCase = (newViewCase) => {
+        setViewCase(newViewCase);
     }
 
     return (
@@ -31,6 +39,16 @@ const SearchContainer = ({isFirstSearch, fetchVideos}) => {
                         Поиск видео
                     </h1>
                     <SearchForm onSubmit={handleSearch} />
+                    { !isFirstSearch && (
+                        <>
+                            <FilterPanel 
+                                query={query} 
+                                countVideos={videos.length}
+                                viewCase={viewSCase} 
+                                toggleViewCase={toggleViewCase}
+                            />
+                        </>)
+                    }
                 </div>
             </Col>
         </div>
@@ -38,13 +56,17 @@ const SearchContainer = ({isFirstSearch, fetchVideos}) => {
 }
 
 SearchContainer.propTypes = {
-    isFirstSearch: PropTypes.bool.isRequired
+    isFirstSearch: PropTypes.bool.isRequired,
+    videos: PropTypes.array.isRequired,
+    query: PropTypes.string
 };
 
 const mapStateToProps = ({search}) => {
-    const {isFirstSearch} = search;
+    const { isFirstSearch, videos, query } = search;
     return {
-        isFirstSearch
+        isFirstSearch,
+        videos,
+        query
     };
 }
 
