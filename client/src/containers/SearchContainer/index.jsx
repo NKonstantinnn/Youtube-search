@@ -1,11 +1,12 @@
 import React,{useState} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { Col } from 'antd';
+import { Col, Row } from 'antd';
 import {fetchVideos} from './redux/actions';
 
 import SearchForm from './containers/SearchForm';
 import FilterPanel from './components/FilterPanel';
+import VideoCard from './components/VideoCard';
 import ViewCase from '../.../../../assets/types/ViewCase';
 
 import './style.scss';
@@ -47,6 +48,13 @@ const SearchContainer = ({isFirstSearch, query, videos, fetchVideos}) => {
                                 viewCase={viewSCase} 
                                 toggleViewCase={toggleViewCase}
                             />
+                            <Row className="video-list" gutter={[16, 20]}>
+                                {
+                                    videos.map((video) => (
+                                        <VideoCard key={video.id} video={video} viewCase={viewSCase} />
+                                    ))
+                                }
+                            </Row>
                         </>)
                     }
                 </div>

@@ -1,0 +1,45 @@
+@import  '../../../../assets/styles/colors.scss';
+
+.video-card {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    &__video {
+        border: 1px solid $color-accent;
+        width: 100%;
+
+        &_view-case-list {
+            width: 245px;
+            margin-right: 20px;
+        }
+    }
+
+    &_view-case-list {
+        flex-direction: row;
+    }
+
+    &__info {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    &__title {
+        color: $color-black;
+        font-weight: bold;
+        margin-bottom: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__description {
+        color: $color-gray-light;
+    }
+
+    &__chanel-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
