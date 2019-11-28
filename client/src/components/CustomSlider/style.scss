@@ -1,0 +1,11 @@
+.custom-slider {
+    display: flex;
+
+    &__slider {
+        width: 100%;
+    }
+}
+
+.custom-slider .custom-slider__input {
+    margin-left: 20px;
+}

@@ -52,11 +52,11 @@ const SignInForm = (props) => {
             <form className="sign-in-form__form" onSubmit={handleSubmit}>
                 <div className="sign-in-form__form-item">
                     <label className="sign-in-form__label">Логин</label>
-                    <Field className="sign-in-form__input" name="name" type="text" component={CustomInput} />
+                    <Field name="name" type="text" component={CustomInput} />
                 </div>
                 <div className="sign-in-form__form-item">
                     <label className="sign-in-form__label">Пароль</label>
-                    <Field className="sign-in-form__input" name="password" type="password" component={CustomInput} />
+                    <Field name="password" type="password" component={CustomInput} />
                 </div>
                 <Button 
                     className="sign-in-form__button" 

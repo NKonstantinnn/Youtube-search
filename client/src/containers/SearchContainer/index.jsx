@@ -8,12 +8,15 @@ import SearchForm from './containers/SearchForm';
 import FilterPanel from './components/FilterPanel';
 import VideoCard from './components/VideoCard';
 import ViewCase from '../.../../../assets/types/ViewCase';
+import FavouriteQueryModal from '../../modals/FavoutiteQueryModal';
 
 import './style.scss';
 
-const SearchContainer = ({isFirstSearch, query, videos, fetchVideos}) => {
+const SearchContainer = (props) => {
+    const {isFirstSearch, query, videos, fetchVideos} = props;
 
     const [viewSCase, setViewCase] = useState(ViewCase.GRID);
+    const [isShowFavouriteQueryModal, setIsShowFavouriteQueryModal] = useState(false);
 
     const handleSearch = ({query}) => {
         if(query) {
@@ -23,6 +26,15 @@ const SearchContainer = ({isFirstSearch, query, videos, fetchVideos}) => {
 
     const toggleViewCase = (newViewCase) => {
         setViewCase(newViewCase);
+    }
+
+    const handleToggleFavouriteQueryModal = () => {
+        setIsShowFavouriteQueryModal((prev) => !prev);
+    }
+
+    const saveQuery = () => {
+        console.log('save query')
+        handleToggleFavouriteQueryModal();
     }
 
     return (
@@ -40,6 +52,7 @@ const SearchContainer = ({isFirstSearch, query, videos, fetchVideos}) => {
                         Поиск видео
                     </h1>
                     <SearchForm onSubmit={handleSearch} />
+                    <button onClick={handleToggleFavouriteQueryModal}>Добавить в избранное</button>
                     { !isFirstSearch && (
                         <>
                             <FilterPanel 
@@ -48,7 +61,7 @@ const SearchContainer = ({isFirstSearch, query, videos, fetchVideos}) => {
                                 viewCase={viewSCase} 
                                 toggleViewCase={toggleViewCase}
                             />
-                            <Row className="video-list" gutter={[16, 20]}>
+                            <Row className="search-container__video-list" gutter={[16, 20]}>
                                 {
                                     videos.map((video) => (
                                         <VideoCard key={video.id} video={video} viewCase={viewSCase} />
@@ -59,6 +72,16 @@ const SearchContainer = ({isFirstSearch, query, videos, fetchVideos}) => {
                     }
                 </div>
             </Col>
+
+            {
+               isShowFavouriteQueryModal && (<FavouriteQueryModal  
+                    isSave={true}
+                    isOpen={isShowFavouriteQueryModal}
+                    onToggle={handleToggleFavouriteQueryModal}
+                    onSubmit={saveQuery}
+                    initialValues={{query, order: 'relevance', maxResults: 12 }} 
+                />)
+            }
         </div>
     );
 }

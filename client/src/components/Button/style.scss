@@ -1,6 +1,6 @@
 @import '../../assets/styles/colors.scss';
 
-.btn {
+.button {
     line-height: 1.5;
     position: relative;
     display: inline-block;
@@ -21,5 +21,15 @@
     &:hover {
         background-color: $color-blue-hover;
         border-color: $color-blue-hover;
+    }
+
+    &_outline {
+        background-color: $color-white;
+        color: $color-blue;
+
+        &:hover {
+            background-color: $color-blue;
+            color: $color-white;
+        }
     }
 }

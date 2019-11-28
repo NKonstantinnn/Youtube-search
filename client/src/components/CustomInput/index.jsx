@@ -9,12 +9,14 @@ const CustomInput = ({
   type,
   size,
   placeholder,
+  disabled,
   meta: { touched, error },
 }) => (
   <div
     className="custom-input"
   >
-    <Input className="custom-input__input" {...input} type={type} size={size} placeholder={placeholder} />
+    <Input className="custom-input__input" {...input} 
+      type={type} size={size} placeholder={placeholder} disabled={disabled} />
     {
       (touched && error) && <span className="custom-input__error-msg"><Icon type="warning" />{error}</span>
     }
@@ -28,7 +30,8 @@ CustomInput.propTypes = {
     error: PropTypes.string
   }).isRequired,
   size: PropTypes.string,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  disabled: PropTypes.bool
 };
 
 export default CustomInput;

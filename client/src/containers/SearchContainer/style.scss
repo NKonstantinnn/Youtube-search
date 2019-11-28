@@ -15,7 +15,7 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        height: auto;
+        height: 100%;
         padding-bottom: 20px;
 
         &_defaulted {
@@ -40,13 +40,8 @@
             margin-top: 40px;
         }
     }
-}
 
-.gutter-box {
-    background: #00a0e9;
-    padding: 5px 0;
-}
-
-.video-list {
-    width: calc(100% + 16px);
+    &__video-list {
+        width: calc(100% + 16px);
+    }
 }
