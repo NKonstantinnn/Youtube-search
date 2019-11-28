@@ -4,7 +4,7 @@ import {
     fetchVideosRequest,
     fetchVideosSuccess,
     fetchVideosFailure
-} from './actions';
+} from '../actions/searhActions';
 
 const defaultState = {
     isFetching: false,

@@ -1,7 +1,7 @@
 import {reducer as reduxFormReducer} from 'redux-form';
 import currentUserReducer from './currentUserReducer';
-import signInReducer from '../../SignInContainer/redux/reducer';
-import searchReducer from '../../SearchContainer/redux/reducer';
+import signInReducer from './signInReducer';
+import searchReducer from './searchReducer';
 
 export default {
     form: reduxFormReducer,

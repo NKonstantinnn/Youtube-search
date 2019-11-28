@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'antd';
-import {fetchVideos} from './redux/actions';
+import {fetchVideos} from '../../redux/actions/searhActions';
 
 import SearchForm from './containers/SearchForm';
 import FilterPanel from './components/FilterPanel';

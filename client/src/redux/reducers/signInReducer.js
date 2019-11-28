@@ -4,7 +4,7 @@ import {
     fetchSignInRequest,
     fetchSignInSuccess,
     fetchSignInFailure
-} from './actions';
+} from '../actions/signInActions';
 
 const defaultState = {
     isFetching: false,

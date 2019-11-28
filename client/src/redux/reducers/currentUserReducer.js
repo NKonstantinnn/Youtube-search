@@ -3,7 +3,7 @@ import {
     fetchCurrentUserRequest,
     fetchCurrentUserSuccess,
     fetchCurrentUserFailure
-} from './actions';
+} from '../actions/currentUserActions';
 
 const defaultState = {
     isFetching: false,

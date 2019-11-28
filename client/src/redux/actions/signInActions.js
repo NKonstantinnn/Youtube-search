@@ -1,7 +1,7 @@
 import {createAction} from 'redux-actions';
 
-import authApi from '../../../api/authApi';
-import {fetchCurrentUser} from '../../AppContainer/redux/actions';
+import authApi from '../../api/authApi';
+import {fetchCurrentUser} from './currentUserActions';
 
 export const fetchSignInRequest = createAction('FETCH_SIGN_IN_REQUEST');
 export const fetchSignInSuccess = createAction('FETCH_SIGN_IN_SUCCESS');

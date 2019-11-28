@@ -1,6 +1,6 @@
 import {createAction} from 'redux-actions';
 
-import youtubeApi from '../../../api/youtubeApi';
+import youtubeApi from '../../api/youtubeApi';
 
 export const fetchVideosRequest = createAction('FETCH_VIDEO_REQUEST');
 export const fetchVideosSuccess = createAction('FETCH_VIDEO_SUCCESS');

@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types';
 
 import SignInForm from './containers/SignInForm';
-import {fetchSignIn} from './redux/actions';
+import {fetchSignIn} from '../../redux/actions/signInActions';
 
 import './style.scss';
 

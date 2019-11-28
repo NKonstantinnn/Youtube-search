@@ -22,11 +22,6 @@ class AuthController extends BaseController {
             passport.authenticate('jwt', {session: false}),
             this.signOut
         );
-        this.router.get(
-            '/current',
-            passport.authenticate('jwt', {session: false}),
-            this.currentUser
-        )
     }
 
     private async signUp(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -62,14 +57,6 @@ class AuthController extends BaseController {
             return next(err);
         }
     }
-
-    private async currentUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-        const { user } = req;
-        if(!user) {
-            res.sendStatus(401);
-        }
-        res.json(user);
-    } 
 }
 
 export default AuthController;

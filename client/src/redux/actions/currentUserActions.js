@@ -1,6 +1,6 @@
 import {createAction} from 'redux-actions';
 
-import authApi from '../../../api/authApi';
+import userApi from '../../api/userApi';
 
 export const fetchCurrentUserRequest = createAction('FETCH_CURRENT_USER_REQUEST');
 export const fetchCurrentUserSuccess = createAction('FETCH_CURRENT_USER_SUCCESS');
@@ -10,7 +10,7 @@ export const fetchCurrentUser = (history) => async (dispatch) => {
     try {
         dispatch(fetchCurrentUserRequest());
         if(localStorage.getItem('youtubeToken')) {
-            const response = await authApi.getCurrentUser();
+            const response = await userApi.getCurrentUser();
             const user = response.data;
             dispatch(fetchCurrentUserSuccess(user));
             history.push('/search');
