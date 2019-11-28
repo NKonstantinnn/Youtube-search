@@ -6,6 +6,10 @@ export const fetchCurrentUserRequest = createAction('FETCH_CURRENT_USER_REQUEST'
 export const fetchCurrentUserSuccess = createAction('FETCH_CURRENT_USER_SUCCESS');
 export const fetchCurrentUserFailure = createAction('FETCH_CURRENT_USER_FAILURE');
 
+export const addFavouriteQueryRequest = createAction('ADD_FAVOURITE_QUERY_REQUEST');
+export const addFavouriteQuerySuccess = createAction('ADD_FAVOURITE_QUERY_SUCCESS');
+export const addFavouriteQueryFailure = createAction('ADD_FAVOURITE_QUERY_FAILURE');
+
 export const fetchCurrentUser = (history) => async (dispatch) => {
     try {
         dispatch(fetchCurrentUserRequest());
@@ -26,5 +30,18 @@ export const fetchCurrentUser = (history) => async (dispatch) => {
         history.push('/signin');
         console.log(err);
         dispatch(fetchCurrentUserFailure(err));
+    }
+}
+
+export const addFavouriteQuery = (favouriteQuery) => async (dispatch) => {
+    try {
+        dispatch(addFavouriteQueryRequest());
+        const response = await userApi.addFavouriteQuery(favouriteQuery);
+        const newFavouriteQuery = response.data;
+        dispatch(addFavouriteQuerySuccess(newFavouriteQuery));
+    }
+    catch(err) {
+        console.log(err);
+        dispatch(addFavouriteQueryFailure(err));
     }
 }

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'antd';
 import {fetchVideos} from '../../redux/actions/searhActions';
+import {addFavouriteQuery} from '../../redux/actions/currentUserActions';
 
 import SearchForm from './containers/SearchForm';
 import FilterPanel from './components/FilterPanel';
@@ -13,14 +14,14 @@ import FavouriteQueryModal from '../../modals/FavoutiteQueryModal';
 import './style.scss';
 
 const SearchContainer = (props) => {
-    const {isFirstSearch, query, videos, fetchVideos} = props;
+    const {isFirstSearch, query, videos} = props;
 
     const [viewSCase, setViewCase] = useState(ViewCase.GRID);
     const [isShowFavouriteQueryModal, setIsShowFavouriteQueryModal] = useState(false);
 
     const handleSearch = ({query}) => {
         if(query) {
-            fetchVideos(query);
+            props.fetchVideos(query);
         }
     }
 
@@ -32,8 +33,8 @@ const SearchContainer = (props) => {
         setIsShowFavouriteQueryModal((prev) => !prev);
     }
 
-    const saveQuery = () => {
-        console.log('save query')
+    const saveFavouriteQuery = async (favouriteQuery) => {
+        await props.addFavouriteQuery(favouriteQuery);
         handleToggleFavouriteQueryModal();
     }
 
@@ -78,7 +79,7 @@ const SearchContainer = (props) => {
                     isSave={true}
                     isOpen={isShowFavouriteQueryModal}
                     onToggle={handleToggleFavouriteQueryModal}
-                    onSubmit={saveQuery}
+                    onSubmit={saveFavouriteQuery}
                     initialValues={{query, order: 'relevance', maxResults: 12 }} 
                 />)
             }
@@ -102,7 +103,8 @@ const mapStateToProps = ({search}) => {
 }
 
 const mapDispatchToProps = {
-    fetchVideos
+    fetchVideos,
+    addFavouriteQuery
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);

@@ -2,14 +2,31 @@ import {handleActions} from 'redux-actions';
 import {
     fetchCurrentUserRequest,
     fetchCurrentUserSuccess,
-    fetchCurrentUserFailure
+    fetchCurrentUserFailure,
+    addFavouriteQueryRequest,
+    addFavouriteQuerySuccess,
+    addFavouriteQueryFailure
 } from '../actions/currentUserActions';
+
+const transformFavouriteQueries = (queries, query) => {
+    const idx = queries.findIndex((el) => el._id === query.id);
+    if(idx !== -1) {
+        return [
+            ...queries.slice(0, idx), 
+            query,
+            ...queries.slice(idx + 1)
+        ];
+    }
+
+    return [...queries, query];
+}
 
 const defaultState = {
     isFetching: false,
     error: null,
     isAuth: false,
-    user: null
+    user: null,
+    isQueryFetching: false
 };
 
 export default handleActions({
@@ -33,6 +50,31 @@ export default handleActions({
             ...state,
             error: payload,
             isFetching: false
+        }
+    },
+    [addFavouriteQueryRequest]: (state) => {
+        return {
+            ...state,
+            isQueryFetching: true,
+            error: null
+        };
+    },
+    [addFavouriteQuerySuccess]: (state, {payload}) => {
+        return {
+            ...state,
+            isQueryFetching: false,
+            user: {
+                ...state.user,
+                favouriteQueries: transformFavouriteQueries(state.user.favouriteQueries, payload)
+
+            }
+        }
+    },
+    [addFavouriteQueryFailure]: (state, {payload}) => {
+        return {
+            ...state,
+            error: payload,
+            isQueryFetching: false
         }
     },
 
