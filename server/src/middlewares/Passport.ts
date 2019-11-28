@@ -64,7 +64,10 @@ Passport.use(new passportJWT.Strategy(
   jwtStrategyOpts,
   async (jwtPayload: any, done: PassportJWTStrategyDone): Promise<void> => {
     try {
-      const user = await UserModel.findById(jwtPayload.userId, {password: false});
+      const user = await UserModel
+        .findById(jwtPayload.userId, {password: false})
+        .lean();
+
       if (!user) {
         return done('Unauthorized', null);
       }

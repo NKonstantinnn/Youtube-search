@@ -2,6 +2,7 @@ import {Request, Response, NextFunction} from 'express';
 
 import BaseController from './BaseController';
 import AuthController from './AuthContoller';
+import UserController from './UserController';
 import IPathRoute from '../interfaces/IPathRoute';
 
 class AppController extends BaseController {
@@ -11,7 +12,8 @@ class AppController extends BaseController {
     }
 
     private routeList: IPathRoute[] = [
-        { path: '/auth', controller: new AuthController()} 
+        { path: '/auth', controller: new AuthController()} ,
+        { path: '/user', controller: new UserController() }
     ];
     
     public init() {

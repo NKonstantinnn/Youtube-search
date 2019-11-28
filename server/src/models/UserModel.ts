@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
-import {prop, Typegoose} from 'typegoose';
+import {prop, arrayProp, Typegoose} from 'typegoose';
+
+import {FavouriteQuery} from './FavouriteQueryModel';
 
 export class User extends Typegoose {
     public _id: mongoose.Types.ObjectId;
@@ -9,6 +11,10 @@ export class User extends Typegoose {
 
     @prop({required: true})
     public password: string;
+    
+
+    @arrayProp({ items: FavouriteQuery })
+    favouriteQueries?: FavouriteQuery[];
 }
 
 const UserModel = new User().getModelForClass(User);
