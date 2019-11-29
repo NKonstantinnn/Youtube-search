@@ -17,3 +17,11 @@ body {
     font-family: $font-app;
     margin: 0;
 }
+
+a {
+    text-decoration: none;
+    
+    &:hover {
+        text-decoration: none;
+    }
+}

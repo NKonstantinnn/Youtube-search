@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'antd';
-import {fetchVideos} from '../../redux/actions/searhActions';
+import {fetchVideos, setIsSearchDefaulted} from '../../redux/actions/searhActions';
 import {addFavouriteQuery} from '../../redux/actions/currentUserActions';
 
 import SearchForm from './containers/SearchForm';
@@ -14,7 +14,7 @@ import FavouriteQueryModal from '../../modals/FavoutiteQueryModal';
 import './style.scss';
 
 const SearchContainer = (props) => {
-    const {isFirstSearch, query, videos} = props;
+    const {isSearchDefaulted, query, videos} = props;
 
     const [viewSCase, setViewCase] = useState(ViewCase.GRID);
     const [isShowFavouriteQueryModal, setIsShowFavouriteQueryModal] = useState(false);
@@ -22,6 +22,10 @@ const SearchContainer = (props) => {
     const handleSearch = ({query}) => {
         if(query) {
             props.fetchVideos(query);
+
+            if(isSearchDefaulted) {
+                props.setIsSearchDefaulted(false);
+            }
         }
     }
 
@@ -41,20 +45,20 @@ const SearchContainer = (props) => {
     return (
         <div className="search-container">
             <Col 
-                span={isFirstSearch ? 18 : 24}
-                offset={isFirstSearch ? 3 : 0}
+                span={isSearchDefaulted ? 18 : 24}
+                offset={isSearchDefaulted ? 3 : 0}
             >
                 <div className={`search-container__content 
-                    ${isFirstSearch ? "search-container__content_defaulted" : ""}`}
+                    ${isSearchDefaulted ? "search-container__content_defaulted" : ""}`}
                 >
                     <h1 className={`search-container__title 
-                        ${isFirstSearch ? "search-container__title_big" : "search-container__title_small"}`}
+                        ${isSearchDefaulted ? "search-container__title_big" : "search-container__title_small"}`}
                     >
                         Поиск видео
                     </h1>
                     <SearchForm onSubmit={handleSearch} />
                     <button onClick={handleToggleFavouriteQueryModal}>Добавить в избранное</button>
-                    { !isFirstSearch && (
+                    { !isSearchDefaulted && (
                         <>
                             <FilterPanel 
                                 query={query} 
@@ -88,15 +92,15 @@ const SearchContainer = (props) => {
 }
 
 SearchContainer.propTypes = {
-    isFirstSearch: PropTypes.bool.isRequired,
+    isSearchDefaulted: PropTypes.bool.isRequired,
     videos: PropTypes.array.isRequired,
     query: PropTypes.string
 };
 
 const mapStateToProps = ({search}) => {
-    const { isFirstSearch, videos, query } = search;
+    const { isSearchDefaulted, videos, query } = search;
     return {
-        isFirstSearch,
+        isSearchDefaulted,
         videos,
         query
     };
@@ -104,7 +108,8 @@ const mapStateToProps = ({search}) => {
 
 const mapDispatchToProps = {
     fetchVideos,
-    addFavouriteQuery
+    addFavouriteQuery,
+    setIsSearchDefaulted
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);

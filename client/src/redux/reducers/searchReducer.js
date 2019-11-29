@@ -3,14 +3,15 @@ import {handleActions} from 'redux-actions';
 import {
     fetchVideosRequest,
     fetchVideosSuccess,
-    fetchVideosFailure
+    fetchVideosFailure,
+    setIsSearchDefaulted
 } from '../actions/searhActions';
 
 const defaultState = {
     isFetching: false,
     error: null,
-    isFirstSearch: true,
     query: "",
+    isSearchDefaulted: true,
     videos: []
 };
 
@@ -28,7 +29,6 @@ export default handleActions({
             ...state,
             error: null,
             isFetching: false,
-            isFirstSearch: false,
             videos: payload.videos,
             query: payload.query
         };
@@ -38,6 +38,12 @@ export default handleActions({
             ...state,
             isFetching: false,
             error: payload
+        };
+    },
+    [setIsSearchDefaulted]: (state, { payload }) => {
+        return {
+            ...state,
+            isSearchDefaulted: payload
         };
     }
 

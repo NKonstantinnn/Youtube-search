@@ -1,0 +1,43 @@
+@import '../../../../assets/styles/colors.scss';
+
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    background: $color-white;
+    cursor: pointer;
+
+    &:hover {
+        background: $color-gray;
+
+        .list-item__actions {
+            opacity: 1;
+        }
+    }
+
+    &__name {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 500;
+        color: $color-black;
+    }
+    
+    &__actions {
+        opacity: 0;
+    }
+
+    &__action {
+        font-size: 14px;
+        line-height: 20px;
+        cursor: pointer
+    }
+
+    &__action-change {
+        color: $color-accent;
+        margin-right: 30px;
+    }
+
+    &__action-delete {
+        color: $color-red;
+    }
+}
