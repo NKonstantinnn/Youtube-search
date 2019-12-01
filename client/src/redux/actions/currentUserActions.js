@@ -14,6 +14,10 @@ export const editFavouriteQueryRequest = createAction('EDIT_FAVOURITE_QUERY_REQU
 export const editFavouriteQuerySuccess = createAction('EDIT_FAVOURITE_QUERY_SUCCESS');
 export const editFavouriteQueryFailure = createAction('EDIT_FAVOURITE_QUERY_FAILURE');
 
+export const removeFavouriteQueryRequest = createAction('REMOVE_FAVOURITE_QUERY_REQUEST');
+export const removeFavouriteQuerySuccess = createAction('REMOVE_FAVOURITE_QUERY_SUCCESS');
+export const removeFavouriteQueryFailure = createAction('REMOVE_FAVOURITE_QUERY_FAILURE');
+
 export const fetchCurrentUser = (history) => async (dispatch) => {
     try {
         dispatch(fetchCurrentUserRequest());
@@ -60,5 +64,18 @@ export const editFavouriteQuery = (favouriteQuery) => async (dispatch) => {
     catch(err) {
         console.log(err);
         dispatch(editFavouriteQueryFailure(err));
+    }
+}
+
+export const removeFavouriteQuery = (id) => async (dispatch) => {
+    try {
+        dispatch(removeFavouriteQueryRequest());
+        const response = await userApi.removeFavouriteQuery(id);
+        const removedId = response.data._id;
+        dispatch(removeFavouriteQuerySuccess(removedId));
+    }
+    catch(err) {
+        console.log(err);
+        dispatch(removeFavouriteQueryFailure(err));
     }
 }

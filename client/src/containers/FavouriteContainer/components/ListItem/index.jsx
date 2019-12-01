@@ -11,6 +11,11 @@ const ListItem = ({name, onClick, onEdit, onRemove}) => {
         onEdit();
     }
 
+    const handleRemove = (e) => {
+        e.stopPropagation();
+        onRemove();
+    }
+
     return (
         <List.Item className="list-item" onClick={onClick}>
             <div className="list-item__name">{name}</div>
@@ -18,7 +23,7 @@ const ListItem = ({name, onClick, onEdit, onRemove}) => {
                 <span className="list-item__action list-item__action-edit" onClick={handleEdit}>
                     Изменить
                 </span>
-                <span className="list-item__action list-item__action-remove" onClick={onRemove}>
+                <span className="list-item__action list-item__action-remove" onClick={handleRemove}>
                     Удалить
                 </span>
             </div>

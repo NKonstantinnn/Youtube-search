@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { FavouriteQuery } from './../models/FavouriteQueryModel';
 import UserModel, {User} from '../models/UserModel';
 import config from '../config';
@@ -26,6 +27,14 @@ class UserService {
             },
         );
         return favouriteQuery;
+    }
+
+    public static async removeFavouriteQuery(userId, queryId): Promise<mongoose.Types.ObjectId> {
+        await UserModel.update(
+            { _id: userId },
+            { $pull: {'favouriteQueries': { _id: queryId } } }
+        );
+        return queryId;
     }
 }
 

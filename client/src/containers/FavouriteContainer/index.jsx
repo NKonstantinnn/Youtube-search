@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import {initialize} from 'redux-form';
 
 import {fetchVideos, setIsSearchDefaulted} from '../../redux/actions/searhActions';
-import {editFavouriteQuery} from '../../redux/actions/currentUserActions';
+import {editFavouriteQuery, removeFavouriteQuery} from '../../redux/actions/currentUserActions';
 import ListItem from './components/ListItem';
 import FavouriteQueryModal from '../../modals/FavoutiteQueryModal';
 
@@ -19,7 +19,7 @@ const renderItem = (handleClick, handleEdit, handleRemove) => (item) => {
             name={item.name}
             onClick={() => handleClick(item)}
             onEdit={() => handleEdit(item)}
-            onRemove={handleRemove}
+            onRemove={() => handleRemove(item)}
         />
     );
 }
@@ -49,6 +49,10 @@ const FavouriteContainer = (props) => {
         handleToggleFavouriteQueryModal()
     }
 
+    const handleRemoveQuery = (data) => {
+        props.removeFavouriteQuery(data._id);
+    }
+
     const editFavouriteQuery = async (favouriteQuery) => {
         await props.editFavouriteQuery(favouriteQuery);
         handleToggleFavouriteQueryModal();
@@ -72,7 +76,7 @@ const FavouriteContainer = (props) => {
                         renderItem={renderItem(
                             handleClickQuery, 
                             handleEditQuery,
-                            () => { console.log('remove') }
+                            handleRemoveQuery
                         )}
                     />
                 </div>
@@ -110,6 +114,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchVideos: (query, maxResults, order) => dispatch(fetchVideos(query, maxResults, order)),
         setIsSearchDefaulted: (value) => dispatch(setIsSearchDefaulted(value)),
         editFavouriteQuery: (query) => dispatch(editFavouriteQuery(query)),
+        removeFavouriteQuery: (query) => dispatch(removeFavouriteQuery(query)),
         reduxFormInitialize: (form, data) => dispatch(initialize(form, data))
     };
 }

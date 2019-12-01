@@ -8,7 +8,10 @@ import {
     addFavouriteQueryFailure,
     editFavouriteQueryRequest,
     editFavouriteQuerySuccess,
-    editFavouriteQueryFailure
+    editFavouriteQueryFailure,
+    removeFavouriteQueryRequest,
+    removeFavouriteQuerySuccess,
+    removeFavouriteQueryFailure
 } from '../actions/currentUserActions';
 
 const transformFavouriteQueries = (queries, query) => {
@@ -20,8 +23,12 @@ const transformFavouriteQueries = (queries, query) => {
             ...queries.slice(idx + 1)
         ];
     }
-
     return [...queries, query];
+}
+
+const removeFavouriteQuery = (queries, _id) => {
+    const idx = queries.findIndex((el) => el._id === _id);
+    return [...queries.slice(0, idx), ...queries.slice(idx + 1)];
 }
 
 const defaultState = {
@@ -105,5 +112,29 @@ export default handleActions({
             isQueryFetching: false
         }
     },
+    [removeFavouriteQueryRequest]: (state) => {
+        return {
+            ...state,
+            isQueryFetching: true,
+            error: null
+        };
+    },
+    [removeFavouriteQuerySuccess]: (state, {payload}) => {
+        return {
+            ...state,
+            isQueryFetching: false,
+            user: {
+                ...state.user,
+                favouriteQueries: removeFavouriteQuery(state.user.favouriteQueries, payload)
 
+            }
+        }
+    },
+    [removeFavouriteQueryFailure]: (state, {payload}) => {
+        return {
+            ...state,
+            error: payload,
+            isQueryFetching: false
+        }
+    },
 }, defaultState);

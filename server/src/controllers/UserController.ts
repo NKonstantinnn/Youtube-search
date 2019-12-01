@@ -23,6 +23,11 @@ class UserController extends BaseController {
             passport.authenticate('jwt', {session: false}),
             this.updateFavouriteQuery
         );
+        this.router.delete(
+            '/favourite/:id',
+            passport.authenticate('jwt', {session: false}),
+            this.removeFavouriteQuery
+        );
     }
 
     private async currentUser(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -50,6 +55,18 @@ class UserController extends BaseController {
             const user = req.user as User;
             const updatedQuery = await UserService.updateFavouriteQuery(user._id, req.body);
             res.json(updatedQuery);
+        }
+        catch(err) {
+            console.log(err);
+            return next(err);
+        }
+    }
+
+    private async removeFavouriteQuery(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            const user = req.user as User;
+            const removedId = await UserService.removeFavouriteQuery(user._id, req.params.id);
+            res.json({_id: removedId});
         }
         catch(err) {
             console.log(err);
