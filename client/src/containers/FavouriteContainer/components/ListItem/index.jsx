@@ -4,15 +4,21 @@ import PropTypes from 'prop-types';
 
 import './style.scss';
 
-const ListItem = ({name, onClick, onChange, onRemove}) => {
+const ListItem = ({name, onClick, onEdit, onRemove}) => {
+
+    const handleEdit = (e) => {
+        e.stopPropagation();
+        onEdit();
+    }
+
     return (
         <List.Item className="list-item" onClick={onClick}>
             <div className="list-item__name">{name}</div>
             <div className="list-item__actions">
-                <span className="list-item__action list-item__action-change" onClick={onChange}>
+                <span className="list-item__action list-item__action-edit" onClick={handleEdit}>
                     Изменить
                 </span>
-                <span className="list-item__action list-item__action-delete" onClick={onRemove}>
+                <span className="list-item__action list-item__action-remove" onClick={onRemove}>
                     Удалить
                 </span>
             </div>
@@ -23,7 +29,7 @@ const ListItem = ({name, onClick, onChange, onRemove}) => {
 ListItem.propTypes = {
     name: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired
 };
 

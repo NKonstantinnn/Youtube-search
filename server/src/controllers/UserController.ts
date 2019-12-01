@@ -18,6 +18,11 @@ class UserController extends BaseController {
             passport.authenticate('jwt', {session: false}),
             this.addFavouriteQuery
         );
+        this.router.put(
+            '/favourite',
+            passport.authenticate('jwt', {session: false}),
+            this.updateFavouriteQuery
+        );
     }
 
     private async currentUser(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -33,6 +38,18 @@ class UserController extends BaseController {
             const user = req.user as User;
             const updatedUser = await UserService.addFavouriteQuery(user._id, req.body);
             res.json(updatedUser.favouriteQueries.pop());
+        }
+        catch(err) {
+            console.log(err);
+            return next(err);
+        }
+    }
+
+    private async updateFavouriteQuery(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            const user = req.user as User;
+            const updatedQuery = await UserService.updateFavouriteQuery(user._id, req.body);
+            res.json(updatedQuery);
         }
         catch(err) {
             console.log(err);

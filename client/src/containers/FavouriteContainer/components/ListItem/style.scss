@@ -29,15 +29,16 @@
     &__action {
         font-size: 14px;
         line-height: 20px;
+        padding: 5px 0;
         cursor: pointer
     }
 
-    &__action-change {
+    &__action-edit {
         color: $color-accent;
         margin-right: 30px;
     }
 
-    &__action-delete {
+    &__action-remove {
         color: $color-red;
     }
 }

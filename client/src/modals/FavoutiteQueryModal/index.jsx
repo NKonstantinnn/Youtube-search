@@ -15,7 +15,7 @@ const orderTypes = {
     relevance: 'Релевантности',
     title: 'Алфавиту',
     videoCount: 'Количеству видео на канале',
-    viewCount: 'Количесвту просмотров'
+    viewCount: 'Количеству просмотров'
 };
 
 const FavouriteQueryModal = (props) => {
@@ -26,7 +26,6 @@ const FavouriteQueryModal = (props) => {
         onToggle,
         handleSubmit
     } = props;
-
 
     return (
         <Modal className="favourite-query-modal" isOpen={isOpen} toggle={onToggle}>

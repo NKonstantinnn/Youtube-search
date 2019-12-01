@@ -5,11 +5,14 @@ import {
     fetchCurrentUserFailure,
     addFavouriteQueryRequest,
     addFavouriteQuerySuccess,
-    addFavouriteQueryFailure
+    addFavouriteQueryFailure,
+    editFavouriteQueryRequest,
+    editFavouriteQuerySuccess,
+    editFavouriteQueryFailure
 } from '../actions/currentUserActions';
 
 const transformFavouriteQueries = (queries, query) => {
-    const idx = queries.findIndex((el) => el._id === query.id);
+    const idx = queries.findIndex((el) => el._id === query._id);
     if(idx !== -1) {
         return [
             ...queries.slice(0, idx), 
@@ -71,6 +74,31 @@ export default handleActions({
         }
     },
     [addFavouriteQueryFailure]: (state, {payload}) => {
+        return {
+            ...state,
+            error: payload,
+            isQueryFetching: false
+        }
+    },
+    [editFavouriteQueryRequest]: (state) => {
+        return {
+            ...state,
+            isQueryFetching: true,
+            error: null
+        };
+    },
+    [editFavouriteQuerySuccess]: (state, {payload}) => {
+        return {
+            ...state,
+            isQueryFetching: false,
+            user: {
+                ...state.user,
+                favouriteQueries: transformFavouriteQueries(state.user.favouriteQueries, payload)
+
+            }
+        }
+    },
+    [editFavouriteQueryFailure]: (state, {payload}) => {
         return {
             ...state,
             error: payload,

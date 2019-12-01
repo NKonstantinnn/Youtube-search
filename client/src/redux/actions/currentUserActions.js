@@ -10,6 +10,10 @@ export const addFavouriteQueryRequest = createAction('ADD_FAVOURITE_QUERY_REQUES
 export const addFavouriteQuerySuccess = createAction('ADD_FAVOURITE_QUERY_SUCCESS');
 export const addFavouriteQueryFailure = createAction('ADD_FAVOURITE_QUERY_FAILURE');
 
+export const editFavouriteQueryRequest = createAction('EDIT_FAVOURITE_QUERY_REQUEST');
+export const editFavouriteQuerySuccess = createAction('EDIT_FAVOURITE_QUERY_SUCCESS');
+export const editFavouriteQueryFailure = createAction('EDIT_FAVOURITE_QUERY_FAILURE');
+
 export const fetchCurrentUser = (history) => async (dispatch) => {
     try {
         dispatch(fetchCurrentUserRequest());
@@ -43,5 +47,18 @@ export const addFavouriteQuery = (favouriteQuery) => async (dispatch) => {
     catch(err) {
         console.log(err);
         dispatch(addFavouriteQueryFailure(err));
+    }
+}
+
+export const editFavouriteQuery = (favouriteQuery) => async (dispatch) => {
+    try {
+        dispatch(editFavouriteQueryRequest());
+        const response = await userApi.editFavouriteQuery(favouriteQuery);
+        const editedFavouriteQuery = response.data;
+        dispatch(editFavouriteQuerySuccess(editedFavouriteQuery));
+    }
+    catch(err) {
+        console.log(err);
+        dispatch(editFavouriteQueryFailure(err));
     }
 }

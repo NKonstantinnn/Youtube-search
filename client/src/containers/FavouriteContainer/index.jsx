@@ -1,21 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {List} from 'antd';
 import {connect} from 'react-redux';
 import {compose} from 'redux'
 import {withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types';
+import {initialize} from 'redux-form';
 
 import {fetchVideos, setIsSearchDefaulted} from '../../redux/actions/searhActions';
+import {editFavouriteQuery} from '../../redux/actions/currentUserActions';
 import ListItem from './components/ListItem';
+import FavouriteQueryModal from '../../modals/FavoutiteQueryModal';
 
 import './style.scss';
 
-const renderItem = (handleClick, handleChange, handleRemove) => (item) => {
+const renderItem = (handleClick, handleEdit, handleRemove) => (item) => {
     return (
         <ListItem 
             name={item.name}
             onClick={() => handleClick(item)}
-            onChange={handleChange}
+            onEdit={() => handleEdit(item)}
             onRemove={handleRemove}
         />
     );
@@ -23,16 +26,32 @@ const renderItem = (handleClick, handleChange, handleRemove) => (item) => {
 
 const FavouriteContainer = (props) => {
 
-    const {user, history, fetchVideos, isSearchDefaulted, setIsSearchDefaulted} = props;
+    const {user, history, isSearchDefaulted} = props;
+
+    const [isShowFavouriteQueryModal, setIsShowFavouriteQueryModal] = useState(false);
+
+    const handleToggleFavouriteQueryModal = () => {
+        setIsShowFavouriteQueryModal((prev) => !prev);
+    }
 
     const handleClickQuery = (data) => {
         const {query, maxResults, order} = data;
-        fetchVideos(query, maxResults, order);
+        props.fetchVideos(query, maxResults, order);
 
         if(isSearchDefaulted) {
-            setIsSearchDefaulted(false);
+            props.setIsSearchDefaulted(false);
         }
         history.push('/search');
+    }
+
+    const handleEditQuery = (data) => {
+        props.reduxFormInitialize('FavouriteForm', data);
+        handleToggleFavouriteQueryModal()
+    }
+
+    const editFavouriteQuery = async (favouriteQuery) => {
+        await props.editFavouriteQuery(favouriteQuery);
+        handleToggleFavouriteQueryModal();
     }
 
     return (
@@ -52,20 +71,31 @@ const FavouriteContainer = (props) => {
                         dataSource={user.favouriteQueries}
                         renderItem={renderItem(
                             handleClickQuery, 
-                            () => { console.log('change') },
+                            handleEditQuery,
                             () => { console.log('remove') }
                         )}
                     />
                 </div>
             }     
 
+            <FavouriteQueryModal  
+                isSave={false}
+                isOpen={isShowFavouriteQueryModal}
+                onToggle={handleToggleFavouriteQueryModal}
+                onSubmit={editFavouriteQuery}
+            />
+
         </div>
     );
 }
 
 FavouriteContainer.propTypes = {
-    user: PropTypes.object.isRequired,
-    isSearchDefaulted: PropTypes.bool.isRequired
+    user: PropTypes.object,
+    isSearchDefaulted: PropTypes.bool.isRequired,
+    fetchVideos: PropTypes.func.isRequired,
+    setIsSearchDefaulted: PropTypes.func.isRequired,
+    editFavouriteQuery: PropTypes.func.isRequired,
+    reduxFormInitialize:PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({currentUser, search}) => {
@@ -75,9 +105,13 @@ const mapStateToProps = ({currentUser, search}) => {
     }
 }
 
-const mapDispatchToProps = {
-    fetchVideos,
-    setIsSearchDefaulted
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchVideos: (query, maxResults, order) => dispatch(fetchVideos(query, maxResults, order)),
+        setIsSearchDefaulted: (value) => dispatch(setIsSearchDefaulted(value)),
+        editFavouriteQuery: (query) => dispatch(editFavouriteQuery(query)),
+        reduxFormInitialize: (form, data) => dispatch(initialize(form, data))
+    };
 }
 
 export default compose(
