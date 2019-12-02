@@ -1,0 +1,27 @@
+@import '../../../../assets/styles/colors.scss';
+
+.search-input {
+    width: 100%;
+    position: relative;
+
+    &__input {
+        border-radius: 4px 0 0 4px;
+        &:focus {
+            background: $color-blue-light;
+        }
+    }
+
+    &__heart-icon {
+        position: absolute;
+        right: 8px;
+        top: 7px;
+        cursor: pointer;
+
+        & svg {
+            width: 24px;
+            height: 24px;
+            fill: $color-accent;
+        }
+    }
+}
+

@@ -24,6 +24,7 @@ const SearchContainer = (props) => {
 
     const [viewSCase, setViewCase] = useState(ViewCase.GRID);
     const [isShowFavouriteQueryModal, setIsShowFavouriteQueryModal] = useState(false);
+    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
     const handleSearch = ({query}) => {
         if(query) {
@@ -46,10 +47,16 @@ const SearchContainer = (props) => {
     const saveFavouriteQuery = async (favouriteQuery) => {
         await props.addFavouriteQuery(favouriteQuery);
         handleToggleFavouriteQueryModal();
+        setIsPopoverOpen(true);
+    }
+
+    const hidePopover = (e) => {
+        e.stopPropagation();
+        setIsPopoverOpen(false);
     }
 
     return (
-        <div className="search-container">
+        <div className="search-container" onClick={hidePopover}>
             <Col 
                 span={isSearchDefaulted ? 18 : 24}
                 offset={isSearchDefaulted ? 3 : 0}
@@ -62,8 +69,11 @@ const SearchContainer = (props) => {
                     >
                         Поиск видео
                     </h1>
-                    <SearchForm onSubmit={handleSearch} />
-                    <button onClick={handleToggleFavouriteQueryModal}>Добавить в избранное</button>
+                    <SearchForm 
+                        onSubmit={handleSearch} 
+                        isPopoverOpen={isPopoverOpen} 
+                        handleToggleFavouriteQueryModal={handleToggleFavouriteQueryModal}
+                    />
                     { !isSearchDefaulted && (
                         <>
                             <FilterPanel 

@@ -2,18 +2,18 @@ import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 import PropTypes from 'prop-types';
 
-import CusotomInput from '../../../../components/CustomInput';
+import SearchInput from '../../components/SearchInput';
 
 import './style.scss';
 
-const SearchForm = ({handleSubmit}) => {
+const SearchForm = ({handleSubmit, isPopoverOpen, handleToggleFavouriteQueryModal }) => {
     return (
         <form className="search-form" onSubmit={handleSubmit}>
             <Field 
                 name="query" 
-                component={CusotomInput} 
-                size="large"
-                type="text"
+                component={SearchInput} 
+                isPopoverOpen={isPopoverOpen}
+                handleHeartClick={handleToggleFavouriteQueryModal}
                 placeholder="Что хотите посмотреть?" 
             />
             <button type="submit" className="search-form__button">Найти</button>
@@ -22,7 +22,9 @@ const SearchForm = ({handleSubmit}) => {
 }
 
 SearchForm.propTypes = {
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    isPopoverOpen: PropTypes.bool.isRequired,
+    handleToggleFavouriteQueryModal: PropTypes.func.isRequired
 }
 
 export default reduxForm({ 
