@@ -2,6 +2,7 @@
 
 .custom-input {
     width: 100%;
+    position: relative;
     
     &__input:focus {
         background: $color-blue-light;
@@ -9,6 +10,12 @@
 
     &__error-msg {
         color: $color-red;
+    }
+
+    &__password-icon {
+        position: absolute;
+        right: 4px;
+        top: 2px;
     }
 }
 
