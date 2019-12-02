@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {List} from 'antd';
 import {connect} from 'react-redux';
 import {compose} from 'redux'
@@ -8,8 +8,10 @@ import {initialize} from 'redux-form';
 
 import {fetchVideos, setIsSearchDefaulted} from '../../redux/actions/searhActions';
 import {editFavouriteQuery, removeFavouriteQuery} from '../../redux/actions/currentUserActions';
+import {changeActiveTab} from '../../redux/actions/appActions';
 import ListItem from './components/ListItem';
 import FavouriteQueryModal from '../../modals/FavoutiteQueryModal';
+import Tab from '../../assets/types/Tab';
 
 import './style.scss';
 
@@ -25,8 +27,11 @@ const renderItem = (handleClick, handleEdit, handleRemove) => (item) => {
 }
 
 const FavouriteContainer = (props) => {
+    const {user, history, isSearchDefaulted, changeActiveTab} = props;
 
-    const {user, history, isSearchDefaulted} = props;
+    useEffect(() => {
+        changeActiveTab(Tab.FAVOURITE);
+    }, [changeActiveTab]);
 
     const [isShowFavouriteQueryModal, setIsShowFavouriteQueryModal] = useState(false);
 
@@ -41,7 +46,7 @@ const FavouriteContainer = (props) => {
         if(isSearchDefaulted) {
             props.setIsSearchDefaulted(false);
         }
-        history.push('/search');
+        history.push('/');
     }
 
     const handleEditQuery = (data) => {
@@ -99,7 +104,8 @@ FavouriteContainer.propTypes = {
     fetchVideos: PropTypes.func.isRequired,
     setIsSearchDefaulted: PropTypes.func.isRequired,
     editFavouriteQuery: PropTypes.func.isRequired,
-    reduxFormInitialize:PropTypes.func.isRequired
+    reduxFormInitialize: PropTypes.func.isRequired,
+    changeActiveTab: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({currentUser, search}) => {
@@ -115,7 +121,8 @@ const mapDispatchToProps = (dispatch) => {
         setIsSearchDefaulted: (value) => dispatch(setIsSearchDefaulted(value)),
         editFavouriteQuery: (query) => dispatch(editFavouriteQuery(query)),
         removeFavouriteQuery: (query) => dispatch(removeFavouriteQuery(query)),
-        reduxFormInitialize: (form, data) => dispatch(initialize(form, data))
+        reduxFormInitialize: (form, data) => dispatch(initialize(form, data)),
+        changeActiveTab: (activeTab) => dispatch(changeActiveTab(activeTab))
     };
 }
 

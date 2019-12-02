@@ -1,20 +1,26 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'antd';
 import {fetchVideos, setIsSearchDefaulted} from '../../redux/actions/searhActions';
 import {addFavouriteQuery} from '../../redux/actions/currentUserActions';
+import {changeActiveTab} from '../../redux/actions/appActions';
 
 import SearchForm from './containers/SearchForm';
 import FilterPanel from './components/FilterPanel';
 import VideoCard from './components/VideoCard';
 import ViewCase from '../.../../../assets/types/ViewCase';
 import FavouriteQueryModal from '../../modals/FavoutiteQueryModal';
+import Tab from '../../assets/types/Tab';
 
 import './style.scss';
 
 const SearchContainer = (props) => {
-    const {isSearchDefaulted, query, videos} = props;
+    const {isSearchDefaulted, query, videos, changeActiveTab} = props;
+
+    useEffect(() => {
+        changeActiveTab(Tab.SEARCH);
+    }, [changeActiveTab])
 
     const [viewSCase, setViewCase] = useState(ViewCase.GRID);
     const [isShowFavouriteQueryModal, setIsShowFavouriteQueryModal] = useState(false);
@@ -94,7 +100,11 @@ const SearchContainer = (props) => {
 SearchContainer.propTypes = {
     isSearchDefaulted: PropTypes.bool.isRequired,
     videos: PropTypes.array.isRequired,
-    query: PropTypes.string
+    query: PropTypes.string,
+    fetchVideos: PropTypes.func.isRequired,
+    addFavouriteQuery: PropTypes.func.isRequired,
+    setIsSearchDefaulted: PropTypes.func.isRequired,
+    changeActiveTab: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({search}) => {
@@ -109,7 +119,8 @@ const mapStateToProps = ({search}) => {
 const mapDispatchToProps = {
     fetchVideos,
     addFavouriteQuery,
-    setIsSearchDefaulted
+    setIsSearchDefaulted,
+    changeActiveTab
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);

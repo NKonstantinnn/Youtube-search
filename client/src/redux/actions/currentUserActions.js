@@ -25,7 +25,7 @@ export const fetchCurrentUser = (history) => async (dispatch) => {
             const response = await userApi.getCurrentUser();
             const user = response.data;
             dispatch(fetchCurrentUserSuccess(user));
-            history.push('/search');
+            history.push('/');
         }
         else {
             history.push('/signin');

@@ -9,10 +9,11 @@ import Routes from '../../components/Routes';
 import {fetchCurrentUser} from '../../../../redux/actions/currentUserActions';
 
 import './style.scss';
+import Tab from '../../../../assets/types/Tab';
 
 function Main(props) {
     const {
-        isFetching, isAuth, fetchCurrentUser, history
+        isFetching, isAuth, fetchCurrentUser, history, activeTab
     } = props;
 
     useEffect(() => {
@@ -23,7 +24,7 @@ function Main(props) {
     
     return (
         <div className="main">
-            { isAuth && <Header /> }
+            { isAuth && <Header activeTab={activeTab} /> }
             <Routes />
         </div>
     );
@@ -32,14 +33,16 @@ function Main(props) {
 Main.propTypes = {
     isFetching: PropTypes.bool.isRequired,
     isAuth: PropTypes.bool.isRequired,
-    fetchCurrentUser: PropTypes.func.isRequired
+    fetchCurrentUser: PropTypes.func.isRequired,
+    activeTab: PropTypes.oneOf(Object.keys(Tab)).isRequired
 }
 
-const mapStateToProps = ({currentUser}) => {
+const mapStateToProps = ({currentUser, app}) => {
     const {isFetching, isAuth} = currentUser;
     return {
         isFetching,
-        isAuth
+        isAuth,
+        activeTab: app.activeTab
     };
 };
 

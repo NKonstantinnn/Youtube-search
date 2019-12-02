@@ -10,7 +10,7 @@ const Routes = () => {
     return (
         <Switch>
             <Route path="/signin" component={SignInContainer} />
-            <Route path="/search" component={SearchContainer} />
+            <Route exact path="/" component={SearchContainer} />
             <Route path='/favourite' component={FavouriteContainer} />
             <Route render={() => (<h2>Page not found</h2>)} />
         </Switch>

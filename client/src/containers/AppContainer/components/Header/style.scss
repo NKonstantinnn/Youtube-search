@@ -32,12 +32,17 @@
         height: 100%;
         display: flex;
         align-items: center;
-        cursor: pointer;
         transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
         border-bottom: 2px solid transparent;
+        
 
-        &:hover {
+        &_active, &:hover {
+            color: $color-accent;
             border-color: $color-accent;
+        }
+
+        & a:hover {
+            color: $color-accent;
         }
 
         &:first-of-type {
@@ -47,6 +52,10 @@
             }
         }
 
+    }
+
+    &__signout {
+        cursor: pointer;
     }
 
     &__logo {
