@@ -11,7 +11,10 @@ import {
     editFavouriteQueryFailure,
     removeFavouriteQueryRequest,
     removeFavouriteQuerySuccess,
-    removeFavouriteQueryFailure
+    removeFavouriteQueryFailure,
+    signOutCurrentUserRequest,
+    signOutCurrentUserSuccess,
+    signOutCurrentUserFailure
 } from '../actions/currentUserActions';
 
 const transformFavouriteQueries = (queries, query) => {
@@ -135,6 +138,28 @@ export default handleActions({
             ...state,
             error: payload,
             isQueryFetching: false
+        }
+    },
+    [signOutCurrentUserRequest]: (state) => {
+        return {
+            ...state,
+            isFetching: true,
+            error: null
+        };
+    },
+    [signOutCurrentUserSuccess]: (state) => {
+        return {
+            ...state,
+            user: null,
+            isAuth: false,
+            isFetching: false,
+        }
+    },
+    [signOutCurrentUserFailure]: (state, {payload}) => {
+        return {
+            ...state,
+            error: payload,
+            isFetching: false
         }
     },
 }, defaultState);

@@ -18,6 +18,10 @@ export const removeFavouriteQueryRequest = createAction('REMOVE_FAVOURITE_QUERY_
 export const removeFavouriteQuerySuccess = createAction('REMOVE_FAVOURITE_QUERY_SUCCESS');
 export const removeFavouriteQueryFailure = createAction('REMOVE_FAVOURITE_QUERY_FAILURE');
 
+export const signOutCurrentUserRequest = createAction('SIGN_OUT_CURRENT_USER_REQUEST');
+export const signOutCurrentUserSuccess = createAction('SIGN_OUT_CURRENT_USER_SUCCESS');
+export const signOutCurrentUserFailure = createAction('SIGN_OUT_CURRENT_USER_FAILURE');
+
 export const fetchCurrentUser = (history) => async (dispatch) => {
     try {
         dispatch(fetchCurrentUserRequest());
@@ -77,5 +81,19 @@ export const removeFavouriteQuery = (id) => async (dispatch) => {
     catch(err) {
         console.log(err);
         dispatch(removeFavouriteQueryFailure(err));
+    }
+}
+
+export const signOutCurrentUser = (history) => async (dispatch) => {
+    try {
+        dispatch(signOutCurrentUserRequest());
+        await userApi.signOutCurrentUser();
+        localStorage.removeItem('youtubeToken');
+        dispatch(signOutCurrentUserSuccess());
+        history.push('/signin');
+    }
+    catch(err) {
+        console.log(err);
+        dispatch(signOutCurrentUserFailure(err));
     }
 }

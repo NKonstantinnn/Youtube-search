@@ -9,5 +9,6 @@ export default {
     getCurrentUser: () => get(`${baseUrl}/user/current`, getAuthParams()),
     addFavouriteQuery: (favouriteQuery) => post(`${baseUrl}/user/favourite`, favouriteQuery, getAuthParams()),
     editFavouriteQuery: (favouriteQuery) => put(`${baseUrl}/user/favourite`, favouriteQuery, getAuthParams()),
-    removeFavouriteQuery: (queryId) => del(`${baseUrl}/user/favourite/${queryId}`, getAuthParams())
+    removeFavouriteQuery: (queryId) => del(`${baseUrl}/user/favourite/${queryId}`, getAuthParams()),
+    signOutCurrentUser: () => get(`${baseUrl}/auth/signout`, getAuthParams())
 };

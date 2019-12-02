@@ -14,7 +14,7 @@ export const fetchSignIn = (user, history) => async (dispatch) => {
         localStorage.setItem('youtubeToken', data.token);
         dispatch(fetchSignInSuccess(history));
         dispatch(fetchCurrentUser(history));
-        history.push('/search');
+        history.push('/');
     }
     catch(err) {
         console.log(err);
