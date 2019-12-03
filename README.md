@@ -22,33 +22,32 @@ First to open a terminal and execute this command:
 
 #### Client settings
 
-* To open a terminal in project folder /client and run this command: 
+To open a terminal in project folder `/client` and run this command:
 
     $ npm install
 
-* To open a project folder and then to open a file /client/keys/index.js. To change in export object a property `youtubeApiKey` to your YouTube API key.To go to this [link](https://www.slickremix.com/docs/get-api-key-for-youtube/) and to find how to get the API key for YouTube.
+To open a project folder and then to open a file `/client/keys/index.js`. To change in export object a property `youtubeApiKey` to your YouTube API key.To go to this [link](https://www.slickremix.com/docs/get-api-key-for-youtube/) and to find how to get the API key for YouTube.
 
 #### Server settings
 
-* To start the MongoDB server, use this command in Linux: 
+To start the MongoDB server, use this command in Linux:
 
     $ sudo service mongod start
 
-* To enter in the MongoDB shell, use this command in Linux:
+To enter in the MongoDB shell, use this command in Linux:
 
     $ mongo
 
-* To enter the following commands in mongo sequentially and after each command press on the keyboard Enter:
+To enter the following commands in mongo sequentially and after each command press on the keyboard Enter:
 
     $ use youtubesearchdb
     $ db.users.save( { name: "admin", "admin" } )
     $ db.users.save( { name: "<write your username>", "<write your password>" } )
 
-* To open a terminal in project folder /server and run this command: 
+To open a terminal in project folder `/server` and run this command:
 
     $ npm install
-
-* To compile a TypeScript code, use this command: 
+To compile a TypeScript code, use this command: 
 
     $ npm run tsc
 
@@ -57,15 +56,17 @@ Launch application
 
 To start the application you need to open two terminals. The first to start the server, the second to start the client.
 
-Open a terminal in the folder /server and run the command:
+Open a terminal in the folder `/server` and run the command:
 
     $ npm start
 
-Open another terminal in the folder /client and run the command:
+Open another terminal in the folder `/client` and run the command:
 
     $ npm start
 
 `Note`:  Before each application launch you need
-to start the MongoDB server, use this command in Linux:  $ sudo service mongod start
+to start the MongoDB server, use this command in Linux:  
+    
+    $ sudo service mongod start
 
 
