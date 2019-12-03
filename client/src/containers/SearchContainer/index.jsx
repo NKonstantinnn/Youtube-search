@@ -1,7 +1,8 @@
 import React,{useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { Col, Row } from 'antd';
+import { Col as AntdCol } from 'antd';
+import {Row as StrapRow} from 'reactstrap'
 import {fetchVideos, setIsSearchDefaulted} from '../../redux/actions/searhActions';
 import {addFavouriteQuery} from '../../redux/actions/currentUserActions';
 import {changeActiveTab} from '../../redux/actions/appActions';
@@ -57,7 +58,7 @@ const SearchContainer = (props) => {
 
     return (
         <div className="search-container" onClick={hidePopover}>
-            <Col 
+            <AntdCol 
                 span={isSearchDefaulted ? 18 : 24}
                 offset={isSearchDefaulted ? 3 : 0}
             >
@@ -83,17 +84,17 @@ const SearchContainer = (props) => {
                                 viewCase={viewSCase} 
                                 toggleViewCase={toggleViewCase}
                             />
-                            <Row className="search-container__video-list" gutter={[16, 20]}>
+                            <StrapRow xs="12" sm="6" md="4" lg="3">
                                 {
                                     videos.map((video) => (
                                         <VideoCard key={video.id} video={video} viewCase={viewSCase} />
                                     ))
                                 }
-                            </Row>
+                            </StrapRow>
                         </>)
                     }
                 </div>
-            </Col>
+            </AntdCol>
 
             {
                isShowFavouriteQueryModal && (<FavouriteQueryModal  

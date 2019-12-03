@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col} from 'antd';
+import {Col as StrapCol} from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import ViewCase from '../../../../assets/types/ViewCase';
@@ -10,7 +10,7 @@ import './style.scss';
 const VideoCard = ({viewCase, video}) => {
     const isViewCaseList = viewCase === ViewCase.LIST;
     return (
-        <Col span={isViewCaseList ? 24 : 6}>
+        <StrapCol xs="12" md={isViewCaseList ? 12 : 6} lg={isViewCaseList ? 12 : 4} xl={isViewCaseList ? 12 : 3}>
             <div className={`video-card ${isViewCaseList ? "video-card_view-case-list" : ""}`} >
                 <iframe 
                     className={`video-card__video ${isViewCaseList ? "video-card__video_view-case-list" : ""}`} 
@@ -25,7 +25,7 @@ const VideoCard = ({viewCase, video}) => {
                     </div>
                 </div>
             </div>
-        </Col>
+        </StrapCol>
     );
 }
 
