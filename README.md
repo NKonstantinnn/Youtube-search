@@ -41,8 +41,8 @@ To enter in the MongoDB shell, use this command in Linux:
 To enter the following commands in mongo sequentially and after each command press on the keyboard Enter:
 
     $ use youtubesearchdb
-    $ db.users.save( { name: "admin", "admin" } )
-    $ db.users.save( { name: "<write your username>", "<write your password>" } )
+    $ db.users.save( { name: "admin", password: "admin" } )
+    $ db.users.save( { name: "<write your username>", password: "<write your password>" } )
 
 To open a terminal in project folder `/server` and run this command:
 
