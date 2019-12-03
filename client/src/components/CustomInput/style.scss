@@ -16,6 +16,10 @@
         position: absolute;
         right: 4px;
         top: 2px;
+
+        & svg {
+            fill: $color-accent;
+        }
     }
 }
 
