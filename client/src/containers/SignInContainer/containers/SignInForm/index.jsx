@@ -6,43 +6,6 @@ import {reduxForm, Field} from 'redux-form';
 
 import './style.scss';
 
-// const validate = (values) => {
-//     const charactersPattern = /[^0-9a-z_-]/i;   // RegExp to validate the input of valid characters
-//     const errors = {}
-//     //--- Name check ---
-//     // check name for emptiness
-//     if (!values.name) {
-//         errors.name = 'Введите логин';
-//     }
-//     // check name for emptiness with space
-//     else if (values.name.trim() === '') {
-//         errors.name = 'Введите логин';
-//     }
-//     // check name for compliance with the pattern
-//     else if (!charactersPattern.test(values.name.trim())) {
-//         errors.name = 'Логин содержит недопустимые символы';
-//     }
-
-//     //--- Password check ---
-//     // check password for emptiness
-//     if (!values.password) {
-//         errors.password = 'Введите пароль';
-//     }
-//     // check password for emptiness with space
-//      else if (values.password.trim() === '') {
-//         errors.name = 'Введите пароль';
-//     }
-//     // check password min length 
-//     else if (values.password.length < 6) {
-//         errors.password = 'Длинна пароля должна быть не меньше 6 символов';
-//     }
-//     // check password for compliance with the pattern
-//     else if(!charactersPattern.test(values.password.trim())) {
-//         errors.name='Пароль содержит недопустимые символы';
-//     }
-//     return errors
-// }
-
 const SignInForm = (props) => {
     const {handleSubmit} = props;
     return (
