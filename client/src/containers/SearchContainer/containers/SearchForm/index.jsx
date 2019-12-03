@@ -6,13 +6,14 @@ import SearchInput from '../../components/SearchInput';
 
 import './style.scss';
 
-const SearchForm = ({handleSubmit, isPopoverOpen, handleToggleFavouriteQueryModal }) => {
+const SearchForm = ({handleSubmit, isShowHeart, isPopoverOpen, handleToggleFavouriteQueryModal }) => {
     return (
         <form className="search-form" onSubmit={handleSubmit}>
             <Field 
                 name="query" 
                 component={SearchInput} 
                 isPopoverOpen={isPopoverOpen}
+                isShowHeart={isShowHeart}
                 handleHeartClick={handleToggleFavouriteQueryModal}
                 placeholder="Что хотите посмотреть?" 
             />
@@ -24,6 +25,7 @@ const SearchForm = ({handleSubmit, isPopoverOpen, handleToggleFavouriteQueryModa
 SearchForm.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     isPopoverOpen: PropTypes.bool.isRequired,
+    isShowHeart: PropTypes.bool.isRequired,
     handleToggleFavouriteQueryModal: PropTypes.func.isRequired
 }
 

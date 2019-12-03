@@ -72,6 +72,7 @@ const SearchContainer = (props) => {
                     <SearchForm 
                         onSubmit={handleSearch} 
                         isPopoverOpen={isPopoverOpen} 
+                        isShowHeart={query !== ""}
                         handleToggleFavouriteQueryModal={handleToggleFavouriteQueryModal}
                     />
                     { !isSearchDefaulted && (

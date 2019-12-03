@@ -4,11 +4,12 @@
     width: 100%;
     position: relative;
 
-    &__input {
+    & .search-input__input {
         border-radius: 4px 0 0 4px;
-        &:focus {
-            background: $color-blue-light;
-        }
+    }
+
+    &__input:focus {
+        background: $color-blue-light;
     }
 
     &__heart-icon {
