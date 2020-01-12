@@ -36,9 +36,9 @@ class AuthController extends BaseController {
 
     private async signUp(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const { name, password } = req.body;
+            const { login, password } = req.body;
             const hashedPassword = await bcrypt.hash(password, 10);
-            const user = { name, password: hashedPassword };
+            const user = { login, password: hashedPassword };
       
             const dbUser: User = await UserModel.create(user);
             const token = AuthService.generateToken(dbUser);

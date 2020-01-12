@@ -8,6 +8,8 @@ export const fetchVideosFailure = createAction('FETCH_VIDEO_FAILURE');
 
 export const setIsSearchDefaulted = createAction('SET_IS_SEARCH_DEFAULTED');
 
+export const resetSearch = createAction('RESET_SEARH');
+
 export const fetchVideos = (query, maxResults, order) => async (dispatch) => {
     try {
         dispatch(fetchVideosRequest());

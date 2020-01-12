@@ -1,7 +1,5 @@
 import { body } from 'express-validator';
-import bcrypt from 'bcryptjs';
 
-import UserModel from '../models/UserModel';
 import { isUserAlreadyExistsByLogin } from '../middlewares/customValidators';
 
 const charactersPattern = /[^0-9a-z_-]/i;   // RegExp to validate the input of valid characters

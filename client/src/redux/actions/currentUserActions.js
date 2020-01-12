@@ -1,6 +1,7 @@
 import {createAction} from 'redux-actions';
 
 import userApi from '../../api/userApi';
+import { resetSearch } from './searhActions';
 
 export const fetchCurrentUserRequest = createAction('FETCH_CURRENT_USER_REQUEST');
 export const fetchCurrentUserSuccess = createAction('FETCH_CURRENT_USER_SUCCESS');
@@ -90,6 +91,7 @@ export const signOutCurrentUser = (history) => async (dispatch) => {
         await userApi.signOutCurrentUser();
         localStorage.removeItem('youtubeToken');
         dispatch(signOutCurrentUserSuccess());
+        dispatch(resetSearch());
         history.push('/signin');
     }
     catch(err) {

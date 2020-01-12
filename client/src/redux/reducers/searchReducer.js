@@ -4,7 +4,8 @@ import {
     fetchVideosRequest,
     fetchVideosSuccess,
     fetchVideosFailure,
-    setIsSearchDefaulted
+    setIsSearchDefaulted,
+    resetSearch
 } from '../actions/searhActions';
 
 const defaultState = {
@@ -45,6 +46,7 @@ export default handleActions({
             ...state,
             isSearchDefaulted: payload
         };
-    }
+    },
+    [resetSearch]: (state) => defaultState,
 
 }, defaultState);

@@ -18,7 +18,8 @@ function Main(props) {
 
     useEffect(() => {
         fetchCurrentUser(history);
-    }, []);
+    },  // eslint-disable-next-line react-hooks/exhaustive-deps
+    []);
 
     if(isFetching) return (<div>Loading...</div>);
     
