@@ -7,7 +7,7 @@ export class User extends Typegoose {
     public _id: mongoose.Types.ObjectId;
 
     @prop({required: true})
-    public name: string;
+    public login: string;
 
     @prop({required: true})
     public password: string;

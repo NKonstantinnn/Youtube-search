@@ -52,7 +52,7 @@ const SignInForm = (props) => {
             <form className="sign-in-form__form" onSubmit={handleSubmit}>
                 <div className="sign-in-form__form-item">
                     <label className="sign-in-form__label">Логин</label>
-                    <Field name="name" type="text" component={CustomInput} />
+                    <Field name="login" type="text" component={CustomInput} />
                 </div>
                 <div className="sign-in-form__form-item">
                     <label className="sign-in-form__label">Пароль</label>
