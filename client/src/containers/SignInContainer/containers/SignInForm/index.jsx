@@ -47,7 +47,7 @@ const SignInForm = (props) => {
     const {handleSubmit} = props;
     return (
         <Card className="sign-in-form">
-            <img src="/images/logo.png" alt="logo" />
+            <img className="sign-in-form__logo" src="/images/logo.png" alt="logo" />
             <h3 className="sign-in-form__title">Вход</h3>
             <form className="sign-in-form__form" onSubmit={handleSubmit}>
                 <div className="sign-in-form__form-item">
