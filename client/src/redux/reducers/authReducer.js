@@ -1,10 +1,10 @@
 import {handleActions} from 'redux-actions';
 
 import {
-    fetchSignInRequest,
-    fetchSignInSuccess,
-    fetchSignInFailure
-} from '../actions/signInActions';
+    fetchAuthRequest,
+    fetchAuthSuccess,
+    fetchAuthFailure
+} from '../actions/authActions';
 
 const defaultState = {
     isFetching: false,
@@ -12,20 +12,20 @@ const defaultState = {
 };
 
 export default handleActions({
-    [fetchSignInRequest]:(state) => {
+    [fetchAuthRequest]: (state) => {
         return {
             ...state,
             isFetching: true
         };
     },
-    [fetchSignInSuccess]: (state) => {
+    [fetchAuthSuccess]: (state) => {
         return {
             ...state,
             error: null,
             isFetching: false
         };
     },
-    [fetchSignInFailure]: (state, { payload }) => {
+    [fetchAuthFailure]: (state, { payload }) => {
         return {
             ...state,
             isFetching: false,

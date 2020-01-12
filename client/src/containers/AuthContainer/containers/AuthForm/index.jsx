@@ -1,8 +1,11 @@
 import React from 'react';
 import { Card } from 'antd';
+import PropTypes from 'prop-types';
+import {reduxForm, Field} from 'redux-form';
+import { Link } from 'react-router-dom';
+
 import Button from '../../../../components/Button';
 import CustomInput from '../../../../components/CustomInput';
-import {reduxForm, Field} from 'redux-form';
 
 import './style.scss';
 
@@ -43,31 +46,40 @@ import './style.scss';
 //     return errors
 // }
 
-const SignInForm = (props) => {
-    const {handleSubmit} = props;
+const AuthForm = (props) => {
+    const { handleSubmit, isSignUp } = props;
     return (
-        <Card className="sign-in-form">
-            <img className="sign-in-form__logo" src="/images/logo.png" alt="logo" />
-            <h3 className="sign-in-form__title">Вход</h3>
-            <form className="sign-in-form__form" onSubmit={handleSubmit}>
-                <div className="sign-in-form__form-item">
-                    <label className="sign-in-form__label">Логин</label>
+        <Card className="auth-form">
+            <img className="auth-form__logo" src="/images/logo.png" alt="logo" />
+            <h3 className="auth-form__title">{isSignUp ? 'Регистрация' : 'Вход'}</h3>
+            <form className="auth-form__form" onSubmit={handleSubmit}>
+                <div className="auth-form__form-item">
+                    <label className="auth-form__label">Логин</label>
                     <Field name="login" type="text" component={CustomInput} />
                 </div>
-                <div className="sign-in-form__form-item">
-                    <label className="sign-in-form__label">Пароль</label>
+                <div className="auth-form__form-item">
+                    <label className="auth-form__label">Пароль</label>
                     <Field name="password" type="password" component={CustomInput} />
                 </div>
+                <Link className="auth-form__link" to={isSignUp ? '/signin' : '/signup'}>
+                    Перейти на страницу {isSignUp ? 'авторизации' : 'регистрации'}
+                </Link>
                 <Button 
-                    className="sign-in-form__button" 
+                    className="auth-form__button" 
                     type="submit"
                 >
-                    Войти
+                    {isSignUp ? 'Зарегистрироваться' : 'Войти'}
                 </Button>
             </form>
         </Card>
     );
 }
+
+AuthForm.propTypes = {
+    isSignUp: PropTypes.bool.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+};
+
 export default reduxForm({ 
     form: 'SignInForm'
-})(SignInForm);
+})(AuthForm);
