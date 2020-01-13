@@ -8,14 +8,19 @@
   "scripts": {
     "clean": "rimraf bin/*",
     "tsc": "tsc",
+    "copy-client": "cp -r ./client ./bin/client",
     "dev:start": "npm-run-all clean tsc start",
     "dev": "nodemon --watch src -e ts --exec yarn run dev:start",
-    "start": "node ."
+    "start": "node .",
+    "heroku-postbuild:start": "cd client && yarn install && yarn run build",
+    "heroku-postbuild": "npm-run-all clean tsc copy-client"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-validator": "^6.3.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.1.0",
     "passport": "^0.4.0",

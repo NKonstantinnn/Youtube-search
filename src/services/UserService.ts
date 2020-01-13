@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { FavouriteQuery } from './../models/FavouriteQueryModel';
+import { FavouriteQuery } from '../models/FavouriteQueryModel';
 import UserModel, {User} from '../models/UserModel';
 import config from '../config';
 

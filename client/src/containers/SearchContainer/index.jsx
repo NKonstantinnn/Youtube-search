@@ -10,7 +10,7 @@ import {changeActiveTab} from '../../redux/actions/appActions';
 import SearchForm from './containers/SearchForm';
 import FilterPanel from './components/FilterPanel';
 import VideoCard from './components/VideoCard';
-import ViewCase from '../.../../../assets/types/ViewCase';
+import ViewCase from '../../assets/types/ViewCase';
 import FavouriteQueryModal from '../../modals/FavoutiteQueryModal';
 import Tab from '../../assets/types/Tab';
 

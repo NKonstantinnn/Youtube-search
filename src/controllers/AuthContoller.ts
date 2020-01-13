@@ -1,21 +1,27 @@
-import {Request, Response, NextFunction} from 'express';
+import { Request, Response, NextFunction } from 'express';
+import bcrypt from 'bcryptjs';
 
 import BaseController from './BaseController';
 import AuthService from '../services/AuthService';
 import passport from '../middlewares/Passport';
-import {User} from '../models/UserModel';
+import UserModel, { User } from '../models/UserModel';
+import validate from '../middlewares/validate';
+import { SignInValidators, SignUpValidators } from '../validators/AuthValidators';
 
 class AuthController extends BaseController {
 
     public init() {
         this.router.post(
             '/signup',
+            validate(SignUpValidators),
             this.signUp
         );
         this.router.post(
             '/signin', 
-            passport.authenticate('local'),
-            this.signIn
+            passport.authenticate('local', { failWithError: true }),
+            validate(SignInValidators),
+            this.signIn,
+            this.signInError
         );
         this.router.get(
             '/signout',
@@ -24,10 +30,21 @@ class AuthController extends BaseController {
         );
     }
 
+    public signInError(err: Error, req: Request, res: Response, next: NextFunction): Response {
+        return res.status(401).send(err);
+    }
+
     private async signUp(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const user = await AuthService.signUp(req.body);
-            res.status(201).json({...user, msg: 'Success'});
+            const { login, password } = req.body;
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const user = { login, password: hashedPassword };
+      
+            const dbUser: User = await UserModel.create(user);
+            const token = AuthService.generateToken(dbUser);
+      
+            res.cookie('jwt', token, { httpOnly: true });
+            res.status(201).json({ token, message: 'Registration completed', id: dbUser._id });
         }
         catch(err) {
             console.log(err);

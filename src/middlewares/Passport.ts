@@ -17,7 +17,7 @@ Passport.serializeUser((user: User, done: SerializeUserDone): void => {
 
 Passport.deserializeUser(async (id: mongoose.Types.ObjectId, done: DeserializeUserDone): Promise<void> => {
   try {
-    const user = await UserModel.findOne(id, {password: false});
+    const user = await UserModel.findOne(id, { password: false });
     if (!user || !user._id) {
       return done('user not found');
     }
@@ -30,19 +30,19 @@ Passport.deserializeUser(async (id: mongoose.Types.ObjectId, done: DeserializeUs
 });
 
 Passport.use(new passportLocal.Strategy({
-    usernameField: 'name',
+    usernameField: 'login',
     passwordField: 'password',
   },
-  async (name: string, password: string, done: PassportLocalStrategyDone): Promise<void> => {
+  async (login: string, password: string, done: PassportLocalStrategyDone): Promise<void> => {
     try{
-      const user = await UserModel.findOne({ name });
+      const user = await UserModel.findOne({ login });
       if (!user) {
-        return done('Incorrect name or password', null);
+        return done('Неверный логин или пароль', null);
       }
 
       const isValidPassword = await bcrypt.compare(password, user.password);
       if (!isValidPassword) {
-        return done('Incorrect name or password', null);
+        return done('Неверный логин или пароль', null);
       }
 
       delete user.password;
@@ -65,11 +65,11 @@ Passport.use(new passportJWT.Strategy(
   async (jwtPayload: any, done: PassportJWTStrategyDone): Promise<void> => {
     try {
       const user = await UserModel
-        .findById(jwtPayload.userId, {password: false})
+        .findById(jwtPayload.userId, { password: false })
         .lean();
 
       if (!user) {
-        return done('Unauthorized', null);
+        return done('Ошибка авторизации', null);
       }
       return done(null, user);
     } 

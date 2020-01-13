@@ -1,8 +1,7 @@
 @import '../../../../assets/styles/colors.scss';
 @import '../../../../assets/styles/variables.scss';
 
-.sign-in-form {
-
+.auth-form {    
     & .ant-card-body{
         display: flex;
         flex-direction: column;
@@ -16,13 +15,18 @@
         font-size: 18px;
         line-height: 28px;
         text-align: center;
-        margin-top: 32px;
+        margin-top: 16px;
     }
 
     &__form {
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    &__logo {
+        width: 64px;
+        height: 64px;
     }
 
     &__form-item {
@@ -36,7 +40,15 @@
         color: $color-gray-light;
     }
 
+    &__link {
+        font-size: 14px;
+        margin-top: 14px;
+        color: $color-accent;
+        width: 100%;
+        text-align: left;
+    }
+
     &__button {
-        margin-top: 40px;
+        margin-top: 32px;
     }
 }

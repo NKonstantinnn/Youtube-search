@@ -23,9 +23,7 @@ const CustomInput = ({input, size, type, placeholder, disabled }) => {
   }, [type]);
 
   return (
-    <div
-      className="custom-input"
-    >
+    <div className="custom-input">
       <Input className="custom-input__input" {...input} 
         type={inputType} size={size} placeholder={placeholder} disabled={disabled} />
       {
