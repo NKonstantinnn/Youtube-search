@@ -13,7 +13,7 @@
     "dev": "nodemon --watch src -e ts --exec yarn run dev:start",
     "start": "node .",
     "heroku-postbuild:start": "cd client && yarn install && yarn run build",
-    "heroku-postbuild": "yarn run heroku-postbuild:start && yarn run clean && yarn run tsc && yarn run copy-client"
+    "heroku-postbuild": "yarn run heroku-postbuild:start && yarn run copy-client"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -39,7 +39,6 @@
     "@types/passport-local": "^1.0.33",
     "nodemon": "^1.18.7",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.0",
-    "tsc": "^1.20150623.0"
+    "rimraf": "^3.0.0"
   }
 }

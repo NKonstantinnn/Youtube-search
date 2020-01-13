@@ -27,7 +27,7 @@ client/yarn-error.log*
 ## Server ##
 ############
 node_modules
-bin
-src/config/dev.ts
+src
+bin/config/dev.ts
 yarn-error.log
 yarn-debug.log*
