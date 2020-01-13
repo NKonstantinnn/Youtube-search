@@ -2,6 +2,8 @@ import express from 'express';
 import {Express} from "express";
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import cors from 'cors';
+import path from 'path';
 
 import config from './config';
 import AppController from './controllers/AppController';
@@ -46,6 +48,15 @@ export default class App {
      * Initialize and run an application
      */
     public async run(): Promise<void> {
+
+        this.expApp.use(cors());
+
+        // serves the built version of your react app
+        this.expApp.use(express.static(path.join(__dirname, '/client/build')))
+        this.expApp.get('*', (req, res) => {
+            res.sendFile(path.join(__dirname + '/client/build/index.html'))
+        });
+
         // oportunity to get body of request as json type
         this.expApp.use(bodyParser.urlencoded({extended: false}));
         this.expApp.use(bodyParser.json());
@@ -59,21 +70,16 @@ export default class App {
         this.expApp.use(`${config.apiPrefix}`, this.appController.getRouter());
 
          // connect database
-         await mongoose.connect(config.databaseURL, {
+        await mongoose.connect(config.databaseURL, {
             useNewUrlParser: true,
             useFindAndModify: false,
             useUnifiedTopology: true
         });
 
         // start server
-        const port = config.port;
-        this.expApp.listen(port, (err) => {
-            if(err) {
-                console.log(err);
-            }
-            else {
-                console.log('Server is running on port ', port);
-            }
+        const port = process.env.PORT || config.port;
+        this.expApp.listen(port, () => {
+            console.log('Server is running on port ', port);
         });
     }
 }
