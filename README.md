@@ -68,5 +68,3 @@ Open another terminal in the folder `/client` and run the command:
 to start the MongoDB server, use this command in Linux:  
     
     $ sudo service mongod start
-
-
